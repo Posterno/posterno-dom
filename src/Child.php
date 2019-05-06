@@ -425,7 +425,9 @@ class Child extends AbstractNode {
 		// Format child attributes, if applicable.
 		if ( count( $this->attributes ) > 0 ) {
 			foreach ( $this->attributes as $key => $value ) {
-				$attribAry[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
+				if ( $value ) {
+					$attribAry[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
+				}
 			}
 			$attribs = ' ' . implode( ' ', $attribAry );
 		}
