@@ -427,6 +427,11 @@ class Child extends AbstractNode {
 			foreach ( $this->attributes as $key => $value ) {
 				if ( $value ) {
 					if ( is_array( $value ) ) {
+						if ( $this instanceof \PNO\Form\Element\Input\File ) {
+							foreach ( $value as $key => $file ) {
+								unset( $value[ $key ]['path'] );
+							}
+						}
 						$value = maybe_serialize( $value );
 					}
 					$attribAry[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
