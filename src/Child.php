@@ -426,6 +426,9 @@ class Child extends AbstractNode {
 		if ( count( $this->attributes ) > 0 ) {
 			foreach ( $this->attributes as $key => $value ) {
 				if ( $value ) {
+					if ( is_array( $value ) ) {
+						$value = maybe_serialize( $value );
+					}
 					$attribAry[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
 				}
 			}
