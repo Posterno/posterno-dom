@@ -429,7 +429,9 @@ class Child extends AbstractNode {
 					if ( is_array( $value ) ) {
 						if ( $this instanceof \PNO\Form\Element\Input\File ) {
 							foreach ( $value as $key => $file ) {
-								unset( $value[ $key ]['path'] );
+								if ( isset( $value[ $key ]['path'] ) ) {
+									unset( $value[ $key ]['path'] );
+								}
 							}
 						}
 						$value = maybe_serialize( $value );
