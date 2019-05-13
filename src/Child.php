@@ -425,6 +425,9 @@ class Child extends AbstractNode {
 		// Format child attributes, if applicable.
 		if ( count( $this->attributes ) > 0 ) {
 			foreach ( $this->attributes as $key => $value ) {
+				if ( $this instanceof \PNO\Form\Element\Input\File && $key === 'value' ) {
+					continue;
+				}
 				if ( $value ) {
 					if ( is_array( $value ) ) {
 						if ( $this instanceof \PNO\Form\Element\Input\File ) {
@@ -434,8 +437,8 @@ class Child extends AbstractNode {
 								}
 							}
 						}
-						$value = maybe_serialize( $value );
 					}
+
 					$attribAry[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
 				}
 			}
