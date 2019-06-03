@@ -426,19 +426,19 @@ class Child extends AbstractNode {
 		if ( count( $this->attributes ) > 0 ) {
 			foreach ( $this->attributes as $key => $value ) {
 				if ( $this instanceof \PNO\Form\Element\Input\File && $key === 'value' ) {
-					continue;
-				}
-				if ( $value ) {
 					if ( is_array( $value ) ) {
-						if ( $this instanceof \PNO\Form\Element\Input\File ) {
-							foreach ( $value as $key => $file ) {
-								if ( isset( $value[ $key ]['path'] ) ) {
-									unset( $value[ $key ]['path'] );
-								}
+						foreach ( $value as $fkey => $file ) {
+							if ( isset( $value[ $fkey ]['path'] ) ) {
+								unset( $value[ $fkey ]['path'] );
 							}
 						}
 					}
-
+					$value = maybe_serialize( $value );
+				}
+				if ( $this instanceof \PNO\Form\Element\Input\File && $key === 'required' ) {
+					continue;
+				}
+				if ( $value ) {
 					$attribAry[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
 				}
 			}
