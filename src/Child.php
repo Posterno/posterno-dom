@@ -438,7 +438,7 @@ class Child extends AbstractNode {
 				if ( $this instanceof \PNO\Form\Element\Input\File && $key === 'required' ) {
 					continue;
 				}
-				if ( $value ) {
+				if ( $value || $value === null ) {
 					$attribAry[] = esc_attr( $key ) . '="' . esc_attr( $value ) . '"';
 				}
 			}
